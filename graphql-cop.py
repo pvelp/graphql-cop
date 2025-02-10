@@ -40,7 +40,7 @@ parser.add_option('--version', '-v', dest='version', action='store_true', defaul
                         help='Print out the current version and exit.')
 parser.add_option('--tor','-T', dest='tor', action='store_true', default=False,
                   help='Sends the request through the Tor network (ensure Tor is running and properly configured)')
-
+parser.add_option('--output-file', dest='output_file', default=None, help="Write report to output file")
 
 options, args = parser.parse_args()
 
@@ -123,3 +123,7 @@ else:
     for i in json_output:
         if i['result']:
             print('[{}] {} - {} ({})'.format(colored(i['severity'], i['color'], attrs=['bold']), colored(i['title'], 'white', attrs=['bold']), i['description'], i['impact']))
+
+if options.output_file is not None:
+    with open(options.output_file, 'w') as f:
+        f.write(dumps(json_output))
