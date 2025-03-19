@@ -21,7 +21,10 @@ def alias_overloading(url, proxy, headers, debug_mode):
   if debug_mode:
     headers['X-GraphQL-Cop-Test'] = res['title']
   gql_response = graph_query(url, proxies=proxy, headers=headers, payload='query cop { ' + aliases + ' }')
-
+  try:
+    res['response'] = gql_response.json()
+  except Exception as e:
+    print(e)
   res['curl_verify'] = curlify(gql_response)
 
   try:

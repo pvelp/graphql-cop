@@ -17,6 +17,10 @@ def post_based_csrf(url, proxies, headers, debug_mode):
   if debug_mode:
     headers['X-GraphQL-Cop-Test'] = res['title']
   response = request(url, proxies=proxies, headers=headers, data={'query': q}, verb='POST')
+  try:
+    res['response'] = response.json()
+  except Exception as e:
+    print(e)
   res['curl_verify'] = curlify(response)
 
   try:

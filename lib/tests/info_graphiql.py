@@ -1,4 +1,6 @@
 """Collect GraphiQL details."""
+from json import JSONDecodeError
+
 from lib.utils import request, curlify
 
 def detect_graphiql(url, proxy, headers, debug_mode):
@@ -10,7 +12,8 @@ def detect_graphiql(url, proxy, headers, debug_mode):
     'impact':'Information Leakage - /' + url.rsplit('/', 1)[-1],
     'severity':'LOW',
     'color': 'blue',
-    'curl_verify':''
+    'curl_verify':'',
+    'response': ''
   }
 
   heuristics = ('graphiql.min.css', 'GraphQL Playground', 'GraphiQL', 'graphql-playground')
@@ -21,6 +24,11 @@ def detect_graphiql(url, proxy, headers, debug_mode):
   if debug_mode:
       headers['X-GraphQL-Cop-Test'] = res['title']
   response = request(url, proxies=proxy, headers=headers)
+  try:
+    res['response'] = response.json()
+  except Exception as e:
+    print(e)
+
   res['curl_verify'] = curlify(response)
   try:
     if response and any(word in response.text for word in heuristics):

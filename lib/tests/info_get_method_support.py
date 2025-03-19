@@ -18,6 +18,10 @@ def get_method_support(url, proxies, headers, debug_mode):
   if debug_mode:
     headers['X-GraphQL-Cop-Test'] = res['title']
   response = request(url, proxies=proxies, headers=headers, params={'query':q})
+  try:
+    res['response'] = response.json()
+  except Exception as e:
+    print(e)
   res['curl_verify'] = curlify(response)
 
   try:
