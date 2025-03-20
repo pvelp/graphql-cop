@@ -11,7 +11,8 @@ def batch_query(url, proxy, headers, debug_mode):
     'impact':'Denial of Service - /' + url.rsplit('/', 1)[-1],
     'severity':'HIGH',
     'color': 'red',
-    'curl_verify':''
+    'curl_verify':'',
+    'response': ''
   }
 
   if debug_mode:

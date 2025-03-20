@@ -11,7 +11,8 @@ def get_method_support(url, proxies, headers, debug_mode):
     'impact':'Possible Cross Site Request Forgery (CSRF) - /' + url.rsplit('/', 1)[-1],
     'severity':'MEDIUM',
     'color': 'yellow',
-    'curl_verify':''
+    'curl_verify':'',
+    'response': ''
   }
 
   q = 'query cop {__typename}'

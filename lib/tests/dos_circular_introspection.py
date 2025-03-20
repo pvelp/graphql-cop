@@ -10,7 +10,8 @@ def circular_query_introspection(url, proxy, headers, debug_mode):
     'impact':'Denial of Service - /' + url.rsplit('/', 1)[-1],
     'severity':'HIGH',
     'color': 'red',
-    'curl_verify':''
+    'curl_verify':'',
+    'response': ''
   }
 
   q = 'query cop { __schema { types { fields { type { fields { type { fields { type { fields { type { name } } } } } } } } } } }'

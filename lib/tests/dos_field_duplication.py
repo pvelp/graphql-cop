@@ -11,7 +11,8 @@ def field_duplication(url, proxy, headers, debug_mode):
     'impact':'Denial of Service - /' + url.rsplit('/', 1)[-1],
     'severity':'HIGH',
     'color': 'red',
-    'curl_verify':''
+    'curl_verify':'',
+    'response': ''
   }
 
   duplicated_string = '__typename \n' * 500

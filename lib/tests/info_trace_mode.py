@@ -11,7 +11,8 @@ def trace_mode(url, proxy, headers, debug_mode):
     'impact':'Information Leakage - /' + url.rsplit('/', 1)[-1],
     'severity':'INFO',
     'color': 'green',
-    'curl_verify':''
+    'curl_verify':'',
+    'response': ''
   }
 
   q = 'query cop { __typename }'
